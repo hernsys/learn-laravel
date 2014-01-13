@@ -2,6 +2,11 @@
 
 class BaseController extends Controller {
 
+
+	public $restful = true;
+
+
+
 	/**
 	 * Setup the layout used by the controller.
 	 *

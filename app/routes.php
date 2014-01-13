@@ -26,7 +26,7 @@ Route::get('test', function()
 	$user->name = "Horacio";
 	$user->email = "horaciaontar@gmail.com";
 	$user->telephone = "351-6373389";
-	$user->password = "1234!";
+	$user->password = "1111!";
 
 	$user->save();
 
