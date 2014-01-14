@@ -1,0 +1,117 @@
+1) I need:
+   - apache
+   - php 5.3 or >
+   - mysql
+   - xampp( start the xamp: sudo /opt/lampp/lampp start)
+
+2) Download and install composer
+   - curl -sS https://getcomposer.org/installer | php -> this command download composer.phar
+   - move composer.phar /usr/local/bin/composer 	
+
+3)download the zip(https://github.com/laravel/laravel) and put it in the server 
+   - sudo chmod -R 777 laravel-master
+   - within laravel-master: sudo composer install	 
+
+
+4)to create a virtual host
+	----
+
+5) lo launch the server
+
+
+******************************************************************************************
+
+Data Base:
+
+1) In phpmyadmin to create a new dataBase (example laravel)
+
+
+******************************************************************************************
+Create tables with Migration (it is good in teamgroups because it is a versionador)
+
+1) sudo apt-get install php5-mysql
+2) php artisan migrate:install
+
+Problem solved:
+-- php artisan migrate:install
+[PDOException]                                                                                               
+  SQLSTATE[HY000] [2002] Can't connect to local MySQL server through socket '/var/run/mysqld/mysqld.sock' (2)
+++ solution:
+'mysql' => array(
+			'driver'    => 'mysql',
+			'host'      => '127.0.0.1',
+			'database'  => 'laravel',
+			'username'  => 'root',
+			'password'  => '',
+			'charset'   => 'utf8',
+			'collation' => 'utf8_unicode_ci',
+			'prefix'    => '',
+		),
+
+
+
+3)php artisan migrate:make create_users_table
+
+this commnad create the next file
+app/database/migrations/2014_01_11_014514_create_users_table.php
+
+4) edit app/database/migrations/2014_01_11_014514_create_users_table.php
+
+public function up()
+	{
+		Schema::table('users', function($table){
+			
+			$table->create();
+			
+			$table->increments('id');
+			$table->string('email');
+			$table->string('name');
+			$table->string('password');
+			$table->string('telephone');
+			
+			$table->timestamps();
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('users');
+	}
+
+
+5) the up() method is executed with
+
+php artisan migrate 
+
+
+6) the down() method is executed with
+
+php artisan migrate:rollback
+
+
+7) the model is created automatically
+
+8) create a controller in (/app/controllers)
+
+php artisan controller:make UsersController
+
+9)
+
+
+
+
+******************************************************************************************
+
+
+
+
+
+
+
+
+
