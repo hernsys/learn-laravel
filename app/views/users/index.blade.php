@@ -47,8 +47,6 @@
 
 			<!-- we will also add show, edit, and delete buttons -->
 			<td>
-
-				<!-- delete the User (uses the destroy method DESTROY /users/{id} -->
 				<!-- we will add this later since its a little more complicated than the other two buttons -->
 
 				<!-- show the User (uses the show method found at GET /users/{id} -->
@@ -56,6 +54,9 @@
 
 				<!-- edit this User (uses the edit method found at GET /users/{id}/edit -->
 				<a class="btn btn-small btn-info" href="{{ URL::to('users/' . $user->id . '/edit') }}">Edit this User</a>
+
+				<!-- delete the User (uses the destroy method DESTROY /users/{id} -->
+				<a class="btn btn-small btn-alert" href="{{ URL::to('users/delete/' . $user->id ) }}">Delete this User</a>
 
 			</td>
 		</tr>

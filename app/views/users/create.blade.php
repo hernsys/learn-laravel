@@ -37,7 +37,7 @@
 	</div>
 
 	<div class="form-group">
-		{{ Form::label('telephone', 'user Level') }}
+		{{ Form::label('telephone', 'Telephone') }}
 		{{ Form::select('telephone', array('0' => 'Select a Level', '1' => 'Sees Sunlight', '2' => 'Foosball Fanatic', '3' => 'Basement Dweller'), Input::old('telephone'), array('class' => 'form-control')) }}
 	</div>
 

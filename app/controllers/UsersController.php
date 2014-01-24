@@ -7,8 +7,7 @@ class UsersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index(){
 		// get all the users
 		$users = User::all();
 
@@ -21,8 +20,7 @@ class UsersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
+	public function create(){
 		return View::make('users.create');
 	}
 
@@ -31,8 +29,7 @@ class UsersController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
+	public function store(){
 		// validate
         // read more on validation at http://laravel.com/docs/validation
                 $rules = array(
@@ -67,8 +64,7 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
+	public function show($id){
 		// get the user
                 $user = User::find($id);
 
@@ -83,8 +79,7 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
+	public function edit($id){
 		// validate
 		// read more on validation at http://laravel.com/docs/validation
 		$rules = array(
@@ -102,14 +97,21 @@ class UsersController extends \BaseController {
 				->withInput(Input::except('password'));
 		} else {
 			// store
+			$msj = '';
 			$user = user::find($id);
-			$user->name       = Input::get('name');
-			$user->email      = Input::get('email');
-			$user->telephone = Input::get('telephone');
-			$user->save();
+			if(is_null($user)){
+				$msj = 'The user was not found';
+				return Redirect::to('users');	
+			}else{
+				$user->name       = Input::get('name');
+				$user->email      = Input::get('email');
+				$user->telephone = Input::get('telephone');
+				$user->save();
+				$msj = 'Successfully updated user!';
+			}	
 
 			// redirect
-			Session::flash('message', 'Successfully updated user!');
+			Session::flash('message', $msj);
 			return Redirect::to('users');
 		}
 	}
@@ -120,8 +122,7 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
+	public function update($id){
 		// validate
                 // read more on validation at http://laravel.com/docs/validation
                 $rules = array(
@@ -156,14 +157,18 @@ class UsersController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id){
 		// delete
+		$msj = '';
         $user = User::find($id);
-        $user->delete();
-
+        if(is_null($user)){
+        	$msj = 'The user was not found';
+        }else{
+        	$user->delete();	
+        	$msj = 'Successfully deleted the user!';
+        }
         // redirect
-        Session::flash('message', 'Successfully deleted the user!');
+        Session::flash('message', $msj);
         return Redirect::to('users');
 	}
 
